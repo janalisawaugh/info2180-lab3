@@ -28,6 +28,13 @@ cells.forEach(function(tile, index){
             tile.innerHTML = playerX;
             stateTracker[index]= playerX;
 
+            if (checkWin(index, playerX)==true){
+                state = false;
+                status.classList.add("you-won");
+                status.innerHTML = `Congratulations! ${playerX} is the Winner!`
+            }
+            swap();
+
         
         }
     })
@@ -42,9 +49,29 @@ cells.forEach(function(tile, index){
     tile.addEventListener("mouseout", () =>{
         tile.classList.remove("hover");
     })
-});
+});//end of for each cell
 
-/*const winningPlays = [
+function swap(){
+    if (playerX == "X"){
+        playerX = "O";
+    }
+    else if(playerX == "O"){
+        playerX == "X";
+    }
+}
+
+
+//Exercise 4
+function checkWin(index, playerX){
+    for (var i = 0; i<9; i++){
+        if (winningPlays[i][0]==index && stateTracker[winningPlays[i][1]]==playerX && stateTracker[winningPlays[i][2]]==playerX){
+            return true;
+        }
+    }
+    return false;
+}
+
+const winningPlays = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -53,5 +80,5 @@ cells.forEach(function(tile, index){
     [2, 5, 8],
     [0, 4, 8],
     [2, 4, 6]
-];*/
+];
 });
