@@ -7,7 +7,7 @@ const cells = board.querySelectorAll("div");//add board and cells
 //cells. //Exercise 1
 const status = document.querySelector("#status");
 let controls = document.querySelector(".controls");
-const restart = document.getElementById("button");
+const restart = controls.querySelector(".btn");
 let playerX = 'X';
 
 let stateTracker = [];
@@ -81,4 +81,20 @@ const winningPlays = [
     [0, 4, 8],
     [2, 4, 6]
 ];
-});
+
+//Exercise 5
+restart.addEventListener("click", () =>{
+    cells.forEach(tile => {
+        tile.classList.remove("X");
+        tile.classList.remove("O");
+        tile.innerHTML = "";
+    });
+    stateTracker = [];
+    status.classList.remove("you-won")
+    status.innerHTML = "Move your mouse over a square and click to play an X or an O.";
+    state = true;
+    playerX = "X";
+
+})
+
+});//end
