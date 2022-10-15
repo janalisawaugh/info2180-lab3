@@ -1,4 +1,3 @@
-"use strict";
 document.addEventListener("DOMContentLoaded", function(){
 
 //variable declarations
@@ -8,16 +7,34 @@ const cells = board.querySelectorAll("div");//add board and cells
 const status = document.querySelector("#status");
 let controls = document.querySelector(".controls");
 const restart = controls.querySelector(".btn");
-let playerX = 'X';
+let playerX = "X";
 
 let stateTracker = [];
 let state = true;
 
+
+
+function swap(){
+    if (playerX == "X"){
+        playerX = "O";
+    }
+    else if(playerX == "O"){
+        playerX = "X";
+    }
+}
 //function for Exercise 2
 cells.forEach(function(tile, index){
     tile.classList.add("square");//add css square class to cells
+    //Exercise 3
+    tile.addEventListener("mouseover",() =>{ 
+        tile.style.cursor = "pointer";
+        tile.classList.add("hover");
+    })
+    tile.addEventListener("mouseout", () =>{
+        tile.classList.remove("hover");
+    })
     //Exercise 2
-    tile.addEventListener("click", function(e){
+    tile.addEventListener("click", function(e){    
         if(state==true && tile.innerHTML==""){
             if (playerX == "X"){
                 tile.classList.add("X");
@@ -32,33 +49,14 @@ cells.forEach(function(tile, index){
                 state = false;
                 status.classList.add("you-won");
                 status.innerHTML = `Congratulations! ${playerX} is the Winner!`
-            }
-            swap();
-
-        
+            };
+            swap()        
         }
     })
-
-
-
-    //Exercise 3
-    tile.addEventListener("mouseover",() =>{ 
-        tile.style.cursor = "pointer";
-        tile.classList.add("hover");
-    })
-    tile.addEventListener("mouseout", () =>{
-        tile.classList.remove("hover");
-    })
+    
 });//end of for each cell
 
-function swap(){
-    if (playerX == "X"){
-        playerX = "O";
-    }
-    else if(playerX == "O"){
-        playerX == "X";
-    }
-}
+
 
 
 //Exercise 4
